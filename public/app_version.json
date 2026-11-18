@@ -1,0 +1,24 @@
+{
+  "$comment": [
+    "Kharcha app release control file — the FIRST source for GET /api/app-version.",
+    "Release a new version: build the APK in FlutLab, add it to a GitHub release",
+    "of this repo, then update version / versionCode / apkUrl / releaseNotes here",
+    "and push. versionCode is the ONLY comparison value the apps use.",
+    "While apkUrl is empty (or enabled is false) the endpoint falls back to the",
+    "env bindings and the MongoDB app_releases collection — nothing breaks.",
+    "apkUrl may be a direct GitHub release-asset link, a Drive share page or a",
+    "GitHub blob link — known page shapes are auto-converted (src/lib/apk-url.ts)."
+  ],
+  "platform": "android",
+  "enabled": true,
+  "version": "1.0.0",
+  "versionCode": 1,
+  "apkUrl": "",
+  "releaseNotes": [
+    "First Flutter release of Kharcha",
+    "Same features: dashboard, ledger, budgets, reports, recurring, backups",
+    "New version system with splash-screen update checks"
+  ],
+  "mandatory": false,
+  "updatedAt": "2026-09-13T00:00:00Z"
+}

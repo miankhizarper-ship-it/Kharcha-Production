@@ -1,0 +1,266 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  color-scheme: light;
+  /* Scrollbar theme (light) — brand green, quiet track */
+  --scrollbar-thumb: #8ab9a5;
+  --scrollbar-thumb-hover: #57997f;
+  --scrollbar-track: #edf2ef;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/*
+ * Dark theme — brand-cohesive "midnight forest" palette.
+ * Deep green-tinted near-black surfaces (matches the ink #0b0f14 panels and
+ * brand green #1E5D4B) instead of the neutral shadcn defaults.
+ */
+.dark {
+  color-scheme: dark;
+  /* Scrollbar theme (dark) — muted green thumb on transparent track */
+  --scrollbar-thumb: #2c4a3f;
+  --scrollbar-thumb-hover: #368064;
+  --scrollbar-track: transparent;
+  --background: #0a100e;
+  --foreground: #e6efeb;
+  --card: #101815;
+  --card-foreground: #e6efeb;
+  --popover: #101815;
+  --popover-foreground: #e6efeb;
+  --primary: #57997f;
+  --primary-foreground: #06231b;
+  --secondary: #1a2420;
+  --secondary-foreground: #dbe7e2;
+  --muted: #17211d;
+  --muted-foreground: #8fa39b;
+  --accent: #1a2a24;
+  --accent-foreground: #cfe4dc;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: rgba(255, 255, 255, 0.09);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: #368064;
+  --chart-1: #57997f;
+  --chart-2: #8ab9a5;
+  --chart-3: #b7d5c8;
+  --chart-4: #368064;
+  --chart-5: #123b30;
+  --sidebar: #101815;
+  --sidebar-foreground: #e6efeb;
+  --sidebar-primary: #57997f;
+  --sidebar-primary-foreground: #06231b;
+  --sidebar-accent: #1a2a24;
+  --sidebar-accent-foreground: #cfe4dc;
+  --sidebar-border: rgba(255, 255, 255, 0.09);
+  --sidebar-ring: #368064;
+}
+
+@layer base {
+  /* Non-static scroll element — required by framer-motion useScroll(target)
+     (hero 3D rig) dev-mode container check. Kept inside @layer base: Turbopack
+     dev drops top-level additions to the html rule (works in both via layer). */
+  html {
+    position: relative;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Scrollbar theme — slim brand-green bar, rounded thumb with an
+     inset look. Firefox: scrollbar-width/color; WebKit: ::-webkit-*.
+     Kept inside @layer base so the compiler treats it as base CSS.
+     ───────────────────────────────────────────────────────────── */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* Selection follows the brand in both themes */
+  ::selection {
+    background-color: rgba(54, 128, 100, 0.28);
+  }
+
+  .dark ::selection {
+    background-color: rgba(87, 153, 127, 0.4);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Kharcha landing — brand design tokens (app brand green #1E5D4B)
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --color-brand-50: #f0f6f3;
+  --color-brand-100: #dcebe4;
+  --color-brand-200: #b7d5c8;
+  --color-brand-300: #8ab9a5;
+  --color-brand-400: #57997f;
+  --color-brand-500: #368064;
+  --color-brand-600: #256a52;
+  --color-brand-700: #1e5d4b;
+  --color-brand-800: #17493b;
+  --color-brand-900: #123b30;
+  --color-brand-950: #0a241d;
+  --color-ink: #0b0f14;
+  --color-ink-soft: #11161d;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-delayed: float 8.5s ease-in-out 1.4s infinite;
+  --animate-menu-in: menu-in 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Mobile menu sheet entrance */
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Hide scrollbars on the theme-preview swipe track while keeping it
+   fully scrollable (mouse drag, touch swipe, keyboard, snap points). */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Anchor offset so section headings are never hidden behind the fixed navbar */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+/* Safety net: decorative rotated/floating elements must never cause
+   horizontal scroll on any viewport. */
+body {
+  overflow-x: clip;
+}
+
+/* Respect users who prefer reduced motion: disable decorative animation
+   and smooth scrolling entirely. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-float,
+  .animate-float-delayed,
+  .animate-menu-in {
+    animation: none;
+  }
+}

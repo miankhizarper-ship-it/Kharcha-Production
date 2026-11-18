@@ -1,0 +1,11 @@
+# Copy to .dev.vars for local Worker-mode preview (npm run preview).
+# In production these are set in the Cloudflare dashboard instead.
+MONGODB_URI=mongodb+srv://USER:PASSWORD@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
+MONGODB_DATABASE=kharcha_analytics
+ANALYTICS_ADMIN_USERNAME=admin
+ANALYTICS_ADMIN_PASSWORD=pick-a-long-random-password
+ANALYTICS_SESSION_SECRET=pick-another-long-random-string
+# In-app update override (optional — see README “In-app update system”)
+# APP_LATEST_VERSION=1.1.0
+# APP_LATEST_VERSION_CODE=2
+# APP_LATEST_APK_URL=https://github.com/user/repo/releases/download/v1.1.0/kharcha-1.1.0.apk
