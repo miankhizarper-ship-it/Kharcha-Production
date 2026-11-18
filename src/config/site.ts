@@ -2,30 +2,29 @@
  * ─────────────────────────────────────────────────────────────────────────────
  *  SITE CONFIG — SINGLE SOURCE OF TRUTH
  * ─────────────────────────────────────────────────────────────────────────────
- *  APK download link — RUNTIME-DRIVEN, not baked in.
+ *  APK download link.
  *
- *  The live link is the `APP_LATEST_APK_URL` variable in the Cloudflare
- *  dashboard (Worker → Settings → Variables and Secrets). Every download
- *  button fetches it from GET /api/app-version on page load, and the mobile
- *  app's update checker uses the same value — one edit publishes everywhere,
- *  no redeploy. Known page-shaped links (Drive share pages, GitHub blob/raw)
- *  are auto-converted to direct download URLs server-side.
+ *  The release lives in public/app_version.json (version / versionCode /
+ *  apkUrl / releaseNotes). GET /api/app-version serves that file to the
+ *  mobile app's update checker, and every download button fetches the same
+ *  endpoint on page load — one edit publishes everywhere.
  *
  *  This constant is the BUILD-TIME FALLBACK for the rare case the endpoint
- *  cannot answer. It is intentionally EMPTY: there is no hardcoded fallback
- *  download anymore — when the variable is unset/unreachable the buttons
- *  show the "link coming soon" toast instead of serving an outdated APK.
+ *  cannot answer. Keep it in sync with apkUrl in app_version.json: it holds
+ *  the same direct GitHub release-asset link, so the button works even
+ *  without JavaScript or while the API route is unhealthy.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 import { normalizeApkUrl } from "@/lib/apk-url";
 
-export const APK_DOWNLOAD_URL = "";
+export const APK_DOWNLOAD_URL =
+  "https://github.com/miankhizarper-ship-it/Kharcha-Production/releases/download/v1.0.0/kharcha.apk";
 
 /**
  * Direct-download derivation of the build-time fallback via the one shared
  * normalizer (Drive share → direct endpoint, GitHub blob/raw → raw host).
- * Empty fallback in, empty fallback out. The runtime link from
- * /api/app-version is already normalized server-side and never passes here.
+ * The runtime link from /api/app-version is already normalized server-side
+ * and never passes here.
  */
 export const APK_DIRECT_DOWNLOAD_URL = normalizeApkUrl(APK_DOWNLOAD_URL);
 

@@ -3,10 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
-import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
-import { SiteChrome } from "@/components/landing/SiteChrome";
 import {
   APP_DESCRIPTION,
   APP_NAME,
@@ -102,23 +100,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider>
-          {/* Anonymous page-view tracking. Always mounted — the ingest
-              endpoint (/api/analytics) no-ops server-side when MONGODB_URI
-              is not configured, so nothing is ever recorded (and nothing
-              is baked into static HTML at build time). */}
-          <AnalyticsTracker />
-
-          {/* Shared shell: navbar + page + footer on every public route. The
+          {/* Shared shell: navbar + page + footer on every route. The
               flex column keeps the footer pinned to the bottom on short
-              pages. Admin routes opt out via SiteChrome. */}
+              pages. */}
           <div className="flex min-h-screen flex-col">
-            <SiteChrome>
-              <Navbar />
-            </SiteChrome>
+            <Navbar />
             <main className="flex-1">{children}</main>
-            <SiteChrome>
-              <Footer />
-            </SiteChrome>
+            <Footer />
           </div>
           <Toaster />
         </ThemeProvider>

@@ -14,22 +14,19 @@ import { resolveLatestAndroidRelease } from "@/lib/app-release";
  *   "version": "1.1.0",                      // display string
  *   "versionCode": 2,                        // integer, > 0 — compared, never parsed
  *   "apkUrl": "https://…/kharcha-1.1.0.apk", // direct HTTPS download URL
- *   "releaseNotes": ["Added monthly analytics", …], // optional, may be []
+ *   "releaseNotes": ["Added budgets", …], // optional, may be []
  *   "mandatory": false                       // true = dialog cannot be dismissed
  * }
  *
  * Failure modes are explicit so the client can treat everything gracefully:
- * - 404 → no release is configured (neither env bindings nor the
- *   `app_releases` collection has a valid entry) — the app silently continues.
- * - 503 → the lookup itself failed (e.g. database unavailable AND no env
- *   release) — the app silently continues.
+ * - 404 → no release is configured (the control file has apkUrl empty or
+ *   enabled=false) — the app silently continues.
  * Responses are `no-store`: a freshly released build must never be delayed
  * by an edge cache.
  *
- * Where the release comes from (see src/lib/app-release.ts):
- * env bindings (APP_LATEST_VERSION / _VERSION_CODE / _APK_URL / _RELEASE_NOTES
- * / _UPDATE_MANDATORY) override the MongoDB `app_releases` collection;
- * APP_RELEASE_SOURCE=environment|database forces a mode.
+ * Where the release comes from (see src/lib/app-release.ts): the statically
+ * imported public/app_version.json control file — no environment variables,
+ * no database.
  */
 export const dynamic = "force-dynamic";
 

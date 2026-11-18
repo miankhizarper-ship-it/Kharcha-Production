@@ -1,11 +1,11 @@
 {
   "$comment": [
-    "Kharcha app release control file — the FIRST source for GET /api/app-version.",
+    "Kharcha app release control file — the single source for GET /api/app-version.",
     "Release a new version: build the APK in FlutLab, add it to a GitHub release",
     "of this repo, then update version / versionCode / apkUrl / releaseNotes here",
     "and push. versionCode is the ONLY comparison value the apps use.",
-    "While apkUrl is empty (or enabled is false) the endpoint falls back to the",
-    "env bindings and the MongoDB app_releases collection — nothing breaks.",
+    "While apkUrl is empty (or enabled is false) the endpoint answers 404 and the",
+    "download buttons show the coming-soon state — nothing breaks.",
     "apkUrl may be a direct GitHub release-asset link, a Drive share page or a",
     "GitHub blob link — known page shapes are auto-converted (src/lib/apk-url.ts)."
   ],

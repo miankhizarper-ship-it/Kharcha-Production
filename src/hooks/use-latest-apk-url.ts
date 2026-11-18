@@ -5,12 +5,11 @@ import { useEffect, useState } from "react";
 /**
  * Live APK download URL for the website's download buttons.
  *
- * WHY: the buttons historically rendered a URL baked into the JS bundle at
+ * The buttons historically rendered a URL baked into the JS bundle at
  * build time (src/config/site.ts). Swapping the APK link then required a
- * rebuild + redeploy. The backend already exposes the operator-controlled
- * release (GET /api/app-version, fed by the APP_LATEST_* Cloudflare
- * variables with the MongoDB `app_releases` collection as fallback), so the
- * buttons now follow that endpoint at RUNTIME:
+ * rebuild + redeploy. The backend exposes the release control file
+ * (GET /api/app-version, fed by the statically imported
+ * public/app_version.json), so the buttons follow that endpoint at RUNTIME:
  *
  * - One shared fetch per page load (Navbar, Hero, CTA and Footer all mount
  *   this hook — they share a single module-level request).

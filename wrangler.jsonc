@@ -1,8 +1,7 @@
 // Cloudflare Workers config — Kharcha landing page (Next.js via OpenNext).
 // Build: npx opennextjs-cloudflare build → .open-next/worker.js + assets.
-// Set MONGODB_URI, MONGODB_DATABASE, ANALYTICS_ADMIN_USERNAME,
-// ANALYTICS_ADMIN_PASSWORD, ANALYTICS_SESSION_SECRET as Worker variables in
-// the Cloudflare dashboard (Settings → Variables and Secrets).
+// No Worker variables or secrets are required: the release control file
+// (public/app_version.json) ships inside the bundle.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "kharcha-web",

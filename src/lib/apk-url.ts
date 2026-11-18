@@ -2,9 +2,9 @@
  * APK URL normalization — turns known "page-shaped" share links into DIRECT
  * download URLs that work in a browser AND inside the app's update downloader.
  *
- * Why this exists: `APP_LATEST_APK_URL` is documented as a DIRECT HTTPS
- * download URL, but in practice operators paste whatever their file host's
- * web UI hands them:
+ * Why this exists: `apkUrl` in public/app_version.json is documented as a
+ * DIRECT HTTPS download URL, but in practice operators paste whatever their
+ * file host's web UI hands them:
  *
  * - Google Drive share pages (`/file/d/<id>/view?usp=sharing`) only open
  *   Drive's preview — the file is not served as an attachment.
@@ -17,10 +17,11 @@
  *   `github.com/<u>/<r>/raw/refs/heads/<ref>/<path>` (302s to the raw host,
  *   follows fine in browsers and redirect-aware downloaders).
  *
- * Normalizing here means ONE variable (env or database) keeps working no
- * matter which of the common shapes was pasted — every GitHub repo-file shape
- * collapses to the canonical `/raw/refs/heads/…` form — and the same value
- * feeds both the in-app updater (GET /api/app-version) and the website buttons.
+ * Normalizing here means ONE control-file value (apkUrl in
+ * public/app_version.json) keeps working no matter which of the common
+ * shapes was pasted — every GitHub repo-file shape collapses to the
+ * canonical `/raw/refs/heads/…` form — and the same value feeds both the
+ * in-app updater (GET /api/app-version) and the website buttons.
  *
  * Pure string/URL logic — no server-only imports — so any route or test can
  * use it. Unknown hosts are returned unchanged: the caller (sanitizer or
