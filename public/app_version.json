@@ -11,7 +11,7 @@
   ],
   "platform": "android",
   "enabled": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "versionCode": 1,
   "apkUrl": "https://github.com/miankhizarper-ship-it/Kharcha-Production/releases/download/v1.0.0/kharcha.apk",
   "releaseNotes": [
